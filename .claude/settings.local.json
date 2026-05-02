@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp \"C:\\\\Users\\\\hehov\\\\.claude\\\\projects\\\\c--Users-hehov-Desktop-Ai-traiding-project\\\\8f1761c2-8b4e-48e1-b4df-8d74e1a9580b\\\\tool-results\\\\webfetch-1777654241483-ci5vje.bin\" /tmp/design.gz)",
+      "Bash(gunzip -c /tmp/design.gz)",
+      "Read(//tmp/**)",
+      "Bash(mkdir -p /tmp/design_files)",
+      "Bash(tar -xf /tmp/design_extracted.txt -C /tmp/design_files)",
+      "Bash(python3 -)"
+    ]
+  }
+}

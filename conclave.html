@@ -1,0 +1,2634 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conclave — Семь агентов. Один вердикт.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   CONCLAVE — Editorial / Contrarian design system
+   ============================================================ */
+
+:root {
+  --paper: #F1ECE0;
+  --paper-2: #E8E2D2;
+  --ink: #14130F;
+  --ink-2: #2A2620;
+  --ink-3: #6B6358;
+  --ink-4: #A39B8C;
+  --rule: #1A1814;
+  --hair: rgba(20, 19, 15, 0.14);
+  --orange: #E04E1B;
+  --orange-2: #C43E10;
+  --blue: #1B3A5C;
+  --green: #2F6B3B;
+  --red: #B0301E;
+
+  --serif: 'Instrument Serif', 'GT Sectra', 'Times New Roman', Georgia, serif;
+  --sans: 'Inter Tight', 'Inter', -apple-system, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+
+[data-theme="ink"] {
+  --paper: #14130F;
+  --paper-2: #1C1A15;
+  --ink: #F1ECE0;
+  --ink-2: #D9D2C2;
+  --ink-3: #8A8170;
+  --ink-4: #5A5346;
+  --rule: #F1ECE0;
+  --hair: rgba(241, 236, 224, 0.16);
+  --orange: #FF6B2C;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-image:
+    radial-gradient(1200px 600px at 80% -20%, rgba(224, 78, 27, 0.05), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(27, 58, 92, 0.04), transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection { background: var(--orange); color: var(--paper); }
+
+/* ── Typography ───────────────────────────────────────────── */
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+.sans  { font-family: var(--sans); }
+.mono  { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.eyebrow .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-right: 8px;
+  vertical-align: 1.5px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 8.4vw, 132px);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.h1 em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.h3 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.lede {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.6vw, 26px);
+  line-height: 1.35;
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.small {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 720px) {
+  .page { padding: 0 20px; }
+}
+
+.rule {
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.85;
+  width: 100%;
+}
+
+.hairline {
+  height: 1px;
+  background: var(--hair);
+  width: 100%;
+}
+
+/* ── Common ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.btn .arrow {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.btn:hover .arrow { transform: translateX(3px); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--hair);
+  color: var(--ink-2);
+  background: transparent;
+}
+
+.tag-orange { background: var(--orange); color: var(--paper); border-color: var(--orange); }
+.tag-blue   { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+.tag-ink    { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* directional tag colors */
+.dir-long  { color: var(--green); }
+.dir-short { color: var(--red); }
+.dir-skip  { color: var(--ink-3); }
+
+/* ── Marquee ──────────────────────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 28px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  border-right: 1px solid rgba(241, 236, 224, 0.15);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Section spacing ──────────────────────────────────────── */
+.section {
+  padding: 96px 0;
+}
+
+@media (max-width: 720px) {
+  .section { padding: 56px 0; }
+}
+
+/* ── Utility grids ────────────────────────────────────────── */
+.grid { display: grid; gap: 24px; }
+.col-12 { grid-template-columns: repeat(12, 1fr); }
+.col-6  { grid-template-columns: repeat(6, 1fr); }
+.col-4  { grid-template-columns: repeat(4, 1fr); }
+.col-3  { grid-template-columns: repeat(3, 1fr); }
+.col-2  { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 900px) {
+  .col-12, .col-6, .col-4, .col-3 { grid-template-columns: 1fr; }
+  .col-2 { grid-template-columns: 1fr; }
+}
+
+/* ── Reveal on scroll ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   CONCLAVE — section-specific styles
+   ============================================================ */
+
+/* ── Masthead ─────────────────────────────────────────────── */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(241, 236, 224, 0.86);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ink);
+}
+.masthead-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 14px 40px;
+  gap: 24px;
+}
+.masthead-left { color: var(--ink-3); display: flex; gap: 10px; }
+.masthead-left .dim { opacity: 0.45; }
+.masthead-logo {
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 400;
+  text-align: center;
+}
+.logo-dot { color: var(--orange); }
+.masthead-right { display: flex; align-items: center; gap: 24px; justify-content: flex-end; }
+.masthead-nav { display: flex; gap: 22px; }
+.masthead-nav a {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.masthead-nav a:hover { color: var(--orange); }
+.lang-switch { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+.lang-switch button {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: inherit; color: var(--ink-3); letter-spacing: 0.1em;
+}
+.lang-switch button.on { color: var(--ink); font-weight: 600; }
+.lang-switch span { color: var(--ink-4); }
+@media (max-width: 900px) {
+  .masthead-row { grid-template-columns: auto 1fr auto; padding: 12px 20px; }
+  .masthead-nav { display: none; }
+  .masthead-left { display: none; }
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero { position: relative; padding: 80px 0 0; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.7; pointer-events: none; }
+.hero-bg-grid {
+  background-image:
+    linear-gradient(var(--hair) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+}
+.hero-inner { position: relative; padding-top: 40px; }
+.hero-eyebrow { margin-bottom: 32px; }
+.hero-h1 { max-width: 22ch; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 80px;
+  margin-top: 64px;
+  align-items: end;
+}
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+.hero-lede { max-width: 56ch; }
+.hero-cta { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+
+/* Hero colophon (newspaper masthead-style meta) */
+.hero-meta {
+  border-top: 1px solid var(--ink);
+  padding: 18px 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hm-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--ink-3);
+  text-align: center;
+}
+.hm-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.hm-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px dotted var(--hair);
+}
+.hm-row:last-child { border-bottom: 0; }
+.hm-row dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+.hm-row dd {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.hero-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 96px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.hero-stats > .stat:not(:last-child) { border-right: 1px solid var(--hair); }
+.stat { padding: 26px 28px; min-height: 130px; display: flex; flex-direction: column; gap: 8px; }
+.stat-num { font-size: clamp(40px, 4.4vw, 64px); line-height: 1; letter-spacing: -0.03em; color: var(--ink); }
+.stat-unit { font-size: 0.55em; color: var(--ink-3); margin-left: 2px; }
+.stat-lbl { color: var(--ink-3); }
+.spark { margin-top: auto; }
+@media (max-width: 900px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats > .stat { border-right: 1px solid var(--hair) !important; border-bottom: 1px solid var(--hair); }
+  .hero-stats > .stat:nth-child(even) { border-right: 0 !important; }
+}
+
+/* ── Marquee colors ───────────────────────────────────────── */
+.m-pair { font-weight: 600; }
+.m-dir.m-long  { color: #7ED99A; }
+.m-dir.m-short { color: #FF8B7A; }
+.m-dir.m-skip  { color: #C9C0AB; }
+.m-conf { color: rgba(241,236,224,0.7); }
+.m-note { color: rgba(241,236,224,0.45); font-style: italic; }
+.m-aster { color: var(--orange); margin-left: 6px; }
+
+/* ── Section heads ────────────────────────────────────────── */
+.sec-head { padding: 48px 0 56px; }
+
+/* ── Problem ──────────────────────────────────────────────── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 900px) { .problem-grid { grid-template-columns: 1fr; gap: 32px; } }
+.problem-h { max-width: 13ch; }
+.problem-body { padding-top: 12px; }
+.pull-quote {
+  margin-top: 80px;
+  padding: 60px 0;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.pq-mark { font-size: 120px; line-height: 0.7; color: var(--orange); }
+.pq-text { font-size: clamp(28px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -0.02em; max-width: 22ch; margin: 0; font-style: italic; }
+.pq-cite { grid-column: 2; margin-top: 18px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── Dark inverted sections ──────────────────────────────── */
+.dark-section {
+  background: var(--ink);
+  color: var(--paper);
+}
+.dark-section .rule-dark,
+.dark-section .rule { background: rgba(245,239,228,0.22); }
+.dark-section .eyebrow-dark { color: rgba(245,239,228,0.55); }
+.dark-section .lede-dark { color: rgba(245,239,228,0.92); }
+.dark-section .body-dark { color: rgba(245,239,228,0.7); }
+.dark-section .h2,
+.dark-section .h1 { color: var(--paper); }
+.dark-section .pull-quote-dark {
+  border-top-color: rgba(245,239,228,0.18);
+  border-bottom-color: rgba(245,239,228,0.18);
+}
+.dark-section .pull-quote-dark .pq-text { color: var(--paper); }
+.dark-section .pull-quote-dark .pq-cite { color: rgba(245,239,228,0.5); }
+.section-problem { padding-top: 130px; padding-bottom: 130px; position: relative; }
+.section-problem .pq-mark { color: var(--orange); }
+.section-problem em { color: var(--orange); font-style: italic; }
+
+/* ── Council ──────────────────────────────────────────────── */
+.council-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 1100px) { .council-grid { grid-template-columns: 1fr; } }
+.council-copy { padding-top: 12px; position: sticky; top: 100px; }
+.council-wrap { display: flex; flex-direction: column; gap: 24px; }
+.council-stage { position: relative; }
+.council-svg { width: 100%; height: auto; max-width: 720px; margin: 0 auto; display: block; }
+.agent-node { transition: transform 0.2s; }
+.agent-node:hover { transform: scale(1.05); transform-origin: center; transform-box: fill-box; }
+
+.agent-detail {
+  margin-top: 8px;
+  min-height: 130px;
+  padding: 24px;
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+  opacity: 0;
+  transition: opacity 0.2s;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.agent-detail.show { opacity: 1; }
+.agent-detail .ad-eyebrow { color: var(--ink-3); margin-bottom: 8px; }
+.agent-detail .ad-name { margin-bottom: 8px; }
+.agent-detail .ad-full { margin-bottom: 16px; max-width: 50ch; }
+.agent-detail .ad-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+.agent-detail .dim { color: var(--ink-4); margin-right: 6px; }
+.agent-detail .ad-hint { padding: 30px 0; text-align: center; }
+.dim { color: var(--ink-4); }
+
+.council-legend { display: flex; gap: 24px; justify-content: center; padding-top: 8px; }
+.lg-item { display: inline-flex; gap: 8px; align-items: center; }
+.lg-dot { width: 10px; height: 10px; display: inline-block; }
+
+/* ── Method (steps) ───────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.step {
+  padding: 32px 28px;
+  border-right: 1px solid var(--hair);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 380px;
+}
+.step:last-child { border-right: 0; }
+.step-n { font-size: 12px; color: var(--ink-3); letter-spacing: 0.18em; }
+.step-title { font-size: clamp(24px, 2vw, 32px); }
+.step-deco { margin-top: auto; height: 100px; }
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr; }
+  .step { border-right: 0; border-bottom: 1px solid var(--hair); min-height: auto; }
+  .step:last-child { border-bottom: 0; }
+}
+
+/* ── Advantages ───────────────────────────────────────────── */
+.adv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.adv-card {
+  padding: 36px 28px;
+  border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  min-height: 240px;
+}
+.adv-card:nth-child(3n) { border-right: 0; }
+.adv-card:nth-last-child(-n+3) { border-bottom: 0; }
+.adv-n { color: var(--orange); font-size: 32px; line-height: 1; margin-bottom: 18px; font-style: italic; }
+.adv-t { font-size: clamp(22px, 2vw, 28px); margin-bottom: 14px; max-width: 18ch; }
+@media (max-width: 900px) {
+  .adv-grid { grid-template-columns: 1fr; }
+  .adv-card { border-right: 0; }
+  .adv-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--hair); }
+  .adv-card:last-child { border-bottom: 0; }
+}
+
+/* ── Stack ────────────────────────────────────────────────── */
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 900px) { .stack-grid { grid-template-columns: 1fr; } }
+.stack-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.stack-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  background: var(--paper);
+  transition: all 0.15s;
+  font-family: var(--mono);
+}
+.stack-tag:hover { background: var(--ink); color: var(--paper); }
+.stack-tag-n { color: var(--orange); font-weight: 600; }
+.stack-tag:hover .stack-tag-n { color: var(--orange); }
+
+/* ── Dashboard ────────────────────────────────────────────── */
+.dashboard {
+  border: 1px solid var(--ink);
+  background: #FBF7EB;
+  overflow: hidden;
+}
+.dash-chrome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper-2);
+  gap: 16px;
+}
+.dc-left { display: flex; align-items: center; gap: 8px; font-size: 12px; flex-shrink: 0; }
+.dc-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,0.2); flex-shrink: 0; }
+.dc-dot-r { background: #E04E1B; }
+.dc-dot-y { background: #D9B23A; }
+.dc-dot-g { background: #2F6B3B; }
+.dc-title { margin-left: 10px; color: var(--ink-3); }
+.dc-right { color: var(--green); white-space: nowrap; font-size: 11px; flex-shrink: 0; }
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+}
+.dash-chart-cell { grid-column: 1; grid-row: 1; padding: 24px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.dash-verdict-cell { grid-column: 2; grid-row: 1; padding: 24px; border-bottom: 1px solid var(--hair); display: flex; flex-direction: column; gap: 14px; }
+.dash-votes-cell { grid-column: 1; grid-row: 2; padding: 24px; border-right: 1px solid var(--hair); }
+.dash-log-cell { grid-column: 2; grid-row: 2; padding: 24px; }
+
+@media (max-width: 900px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .dash-chart-cell, .dash-verdict-cell, .dash-votes-cell, .dash-log-cell {
+    grid-column: 1; grid-row: auto; border-right: 0; border-bottom: 1px solid var(--hair);
+  }
+}
+
+.chart-wrap { position: relative; }
+.chart-svg { display: block; height: 280px; width: 100%; }
+.chart-meta {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.cm-pair { font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; font-family: var(--mono); }
+.cm-price { font-size: 28px; line-height: 1; font-family: var(--serif); }
+.cm-chg { font-size: 12px; font-family: var(--mono); }
+.cm-chg.pos { color: var(--green); }
+.cm-chg.neg { color: var(--red); }
+
+.dv-eyebrow { color: var(--ink-3); letter-spacing: 0.14em; margin-bottom: 4px; font-family: var(--mono); font-size: 11px; }
+.dv-decision { font-size: clamp(56px, 6vw, 84px); line-height: 1; letter-spacing: -0.02em; font-family: var(--serif); }
+.dv-long { color: var(--green); }
+.dv-short { color: var(--red); }
+.dv-skip { color: var(--ink); }
+.dv-conf { display: flex; flex-direction: column; gap: 6px; }
+.dv-conf-bar { height: 6px; background: var(--paper-2); border: 1px solid var(--hair); position: relative; }
+.dv-conf-fill { position: absolute; inset: 0; height: 100%; transition: width 0.6s ease, background 0.4s ease; }
+.dv-conf-label { color: var(--ink-3); font-family: var(--mono); font-size: 11px; }
+.dv-split { display: flex; gap: 18px; padding-top: 8px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 12px; }
+
+.vote-bars { display: flex; flex-direction: column; gap: 8px; }
+.vote-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 100px 56px 40px;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  padding: 4px 0;
+}
+.vr-id { color: var(--ink-3); letter-spacing: 0.1em; font-family: var(--mono); }
+.vr-name { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vr-bar { height: 6px; background: var(--paper-2); border: 1px solid var(--hair); position: relative; }
+.vr-fill { position: absolute; inset: 0; height: 100%; transition: width 0.6s ease; }
+.vote-long .vr-fill { background: var(--green); }
+.vote-long .vr-dir { color: var(--green); }
+.vote-short .vr-fill { background: var(--red); }
+.vote-short .vr-dir { color: var(--red); }
+.vote-skip .vr-fill { background: var(--ink-3); }
+.vote-skip .vr-dir { color: var(--ink-3); }
+.vr-conf { color: var(--ink-2); text-align: right; font-family: var(--mono); }
+.vr-dir { font-family: var(--mono); }
+
+.trade-log { display: flex; flex-direction: column; gap: 0; font-size: 12px; }
+.tl-head, .tl-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 60px 50px 60px;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hair);
+  font-family: var(--mono);
+}
+.tl-head { color: var(--ink-3); letter-spacing: 0.1em; border-bottom-color: var(--ink); }
+.tl-row:last-child { border-bottom: 0; }
+
+/* ── Roadmap ──────────────────────────────────────────────── */
+.timeline { position: relative; padding-left: 60px; }
+.tl-spine { position: absolute; left: 18px; top: 8px; bottom: 8px; width: 1px; background: var(--ink); }
+.tl-item { position: relative; padding: 0 0 56px; display: grid; grid-template-columns: 1fr; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-marker { position: absolute; left: -54px; top: 4px; }
+.tl-circle { width: 18px; height: 18px; border: 1.5px solid var(--ink); background: var(--paper); border-radius: 50%; position: relative; }
+.tl-item:first-child .tl-circle { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 0 4px rgba(224, 78, 27, 0.18); }
+.tl-q { font-size: 12px; color: var(--ink-3); letter-spacing: 0.14em; margin-bottom: 8px; font-family: var(--mono); }
+.tl-t { font-size: clamp(28px, 3vw, 40px); margin-bottom: 12px; }
+.tl-b { max-width: 60ch; margin-bottom: 14px; }
+.tl-status { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-3); font-family: var(--mono); font-size: 12px; }
+.tl-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); display: inline-block; flex-shrink: 0; }
+.tl-active { color: var(--orange); }
+.tl-active .tl-status-dot { background: var(--orange); animation: pulse 1.6s ease-in-out infinite; }
+
+/* ── FAQ ──────────────────────────────────────────────────── */
+.faq-list { border-top: 1px solid var(--ink); }
+.faq-item { border-bottom: 1px solid var(--hair); }
+.faq-item:last-child { border-bottom: 1px solid var(--ink); }
+.faq-q {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 60px 1fr 40px;
+  gap: 24px;
+  padding: 24px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  align-items: baseline;
+  font: inherit;
+  color: inherit;
+}
+.faq-n { color: var(--ink-3); letter-spacing: 0.14em; font-size: 12px; font-family: var(--mono); }
+.faq-q-text { font-size: clamp(20px, 2vw, 28px); line-height: 1.2; letter-spacing: -0.01em; font-family: var(--serif); }
+.faq-toggle { font-size: 24px; color: var(--ink-3); text-align: right; line-height: 1; font-family: var(--mono); }
+.faq-item:hover .faq-q-text { color: var(--orange); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 0 0 84px;
+}
+.faq-open .faq-a { max-height: 400px; padding: 0 0 28px 84px; }
+.faq-a p { max-width: 64ch; }
+@media (max-width: 720px) {
+  .faq-q { grid-template-columns: 32px 1fr 32px; gap: 12px; }
+  .faq-a { padding-left: 44px; }
+  .faq-open .faq-a { padding-left: 44px; padding-bottom: 24px; }
+}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.cta-eyebrow-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.eyebrow-orange { color: var(--orange); }
+.eyebrow-orange .dot { background: var(--orange); }
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding: 36px 0 32px;
+  align-items: start;
+}
+@media (max-width: 900px) { .cta-grid { grid-template-columns: 1fr; gap: 40px; } }
+.cta-h { max-width: 14ch; }
+.cta-lede { margin-top: 22px; max-width: 48ch; }
+.cta-progress { margin-top: 36px; max-width: 480px; }
+.cta-progress-bar {
+  height: 4px;
+  background: var(--paper-2);
+  border: 1px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.cta-progress-fill {
+  height: 100%;
+  background: var(--orange);
+  transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cta-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 12px;
+}
+.cta-progress-num { font-size: 24px; color: var(--orange); margin-right: 4px; letter-spacing: -0.02em; font-family: var(--serif); }
+
+.cta-form { display: flex; flex-direction: column; gap: 18px; max-width: 480px; }
+.form-row { display: flex; flex-direction: column; gap: 8px; }
+.form-lbl { color: var(--ink-3); letter-spacing: 0.14em; font-family: var(--mono); font-size: 11px; }
+.form-input {
+  font: inherit;
+  font-size: 16px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  border-radius: 0;
+  outline: none;
+}
+.form-input:focus { border-color: var(--orange); box-shadow: 0 0 0 2px rgba(224, 78, 27, 0.18); }
+.cta-btn { margin-top: 8px; align-self: flex-start; padding: 18px 28px; }
+.cta-success { padding: 32px; border: 1px solid var(--ink); background: var(--paper-2); }
+.cta-success-mark { font-size: 56px; line-height: 0.7; color: var(--orange); font-family: var(--serif); }
+.cta-success-h { font-size: 36px; line-height: 1; letter-spacing: -0.02em; margin: 18px 0 0; font-family: var(--serif); }
+
+/* ── Footer ───────────────────────────────────────────────── */
+.footer { padding: 100px 0 36px; background: var(--ink); color: var(--paper); }
+.footer .page > * + * { margin-top: 56px; }
+
+.footer-disclaimer-block {
+  border-top: 1px solid rgba(245,239,228,0.22);
+  border-bottom: 1px solid rgba(245,239,228,0.22);
+  padding: 36px 0;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .footer-disclaimer-block { grid-template-columns: 1fr; gap: 20px; }
+}
+.footer-disc-head { display: flex; align-items: center; gap: 12px; }
+.footer-warn { font-size: 22px; color: var(--orange); line-height: 1; }
+.footer-disc-text {
+  font-size: 18px;
+  line-height: 1.5;
+  font-style: italic;
+  color: rgba(245,239,228,0.78);
+  max-width: 64ch;
+  margin: 0;
+  font-family: var(--serif);
+}
+
+.footer-mid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .footer-mid { grid-template-columns: 1fr; gap: 40px; }
+}
+.footer-mast-col { display: flex; flex-direction: column; gap: 18px; }
+.footer-mast { font-size: 56px; line-height: 0.9; color: var(--paper); letter-spacing: -0.025em; font-family: var(--serif); }
+.footer-mast .logo-dot { color: var(--orange); }
+.footer-tagline { color: rgba(245,239,228,0.6); max-width: 28ch; font-style: italic; font-family: var(--serif); font-size: 17px; line-height: 1.35; }
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+@media (max-width: 720px) { .footer-cols { grid-template-columns: 1fr 1fr; } }
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-col-h {
+  color: rgba(245,239,228,0.45);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.footer-col a {
+  color: rgba(245,239,228,0.85);
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-col a:hover { color: var(--orange); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(245,239,228,0.15);
+}
+.footer-copy { color: rgba(245,239,228,0.5); }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { color: rgba(245,239,228,0.6); text-decoration: none; transition: color 0.15s; }
+.footer-legal a:hover { color: var(--orange); }
+@media (max-width: 720px) {
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+
+  <script>
+// ============================================================
+// CONCLAVE — bilingual content + agent data
+// ============================================================
+
+window.AGENTS = [
+  { id: 'TA',  name: { ru: 'Технический',     en: 'Technical' },     full: { ru: 'Анализ графиков, индикаторы, паттерны',           en: 'Charts, indicators, classic patterns' },           accuracy: 0.71, weight: 0.18, glyph: 'T' },
+  { id: 'VOL', name: { ru: 'Объёмный',         en: 'Volume' },        full: { ru: 'Перетоки ликвидности, OBV, кластерный анализ',     en: 'Liquidity flows, OBV, footprint reading' },          accuracy: 0.68, weight: 0.14, glyph: 'V' },
+  { id: 'SNT', name: { ru: 'Сентимент',        en: 'Sentiment' },     full: { ru: 'Соцсети, новости, страх и жадность',                en: 'Social, news, fear & greed' },                       accuracy: 0.64, weight: 0.10, glyph: 'S' },
+  { id: 'CHN', name: { ru: 'On-Chain',         en: 'On-Chain' },      full: { ru: 'Кошельки китов, ходлеры, активность сети',          en: 'Whale wallets, holders, network activity' },         accuracy: 0.74, weight: 0.16, glyph: 'O' },
+  { id: 'PAT', name: { ru: 'Паттерны',         en: 'Pattern' },       full: { ru: 'ML-распознавание формаций и аномалий',              en: 'ML formation & anomaly recognition' },              accuracy: 0.69, weight: 0.13, glyph: 'P' },
+  { id: 'MAC', name: { ru: 'Макро',            en: 'Macro' },         full: { ru: 'DXY, доходности, корреляции с традфином',           en: 'DXY, yields, tradfi correlations' },                 accuracy: 0.66, weight: 0.12, glyph: 'M' },
+  { id: 'RSK', name: { ru: 'Риск',             en: 'Risk' },          full: { ru: 'Волатильность, ликвидность, размер позиции',        en: 'Volatility, liquidity, position sizing' },           accuracy: 0.78, weight: 0.17, glyph: 'R' },
+];
+
+window.VERDICTS = [
+  { pair: 'BTC/USDT',  dir: 'LONG',  conf: 84, note: { ru: 'единогласно',          en: 'unanimous' } },
+  { pair: 'ETH/USDT',  dir: 'SKIP',  conf: 41, note: { ru: 'разногласие',          en: 'disagreement' } },
+  { pair: 'SOL/USDT',  dir: 'SHORT', conf: 71, note: { ru: 'дивергенция объёма',   en: 'volume divergence' } },
+  { pair: 'AVAX/USDT', dir: 'LONG',  conf: 68, note: { ru: 'on-chain бычий',       en: 'on-chain bullish' } },
+  { pair: 'LINK/USDT', dir: 'SKIP',  conf: 33, note: { ru: 'низкая ликвидность',   en: 'thin liquidity' } },
+  { pair: 'ARB/USDT',  dir: 'LONG',  conf: 62, note: { ru: 'паттерн H&S inv.',     en: 'inv. H&S pattern' } },
+  { pair: 'DOGE/USDT', dir: 'SHORT', conf: 58, note: { ru: 'сентимент перегрет',   en: 'sentiment overheated' } },
+  { pair: 'TIA/USDT',  dir: 'LONG',  conf: 76, note: { ru: 'киты накапливают',     en: 'whales accumulating' } },
+];
+
+window.STEPS = [
+  {
+    n: '01',
+    title: { ru: 'Сбор данных', en: 'Ingest' },
+    body: {
+      ru: 'Котировки, стаканы, on-chain потоки и новости стекаются в единый поток в реальном времени.',
+      en: 'Quotes, order books, on-chain flows and news converge into a single real-time stream.',
+    },
+  },
+  {
+    n: '02',
+    title: { ru: 'Параллельный анализ', en: 'Parallel Analysis' },
+    body: {
+      ru: 'Семь агентов независимо формируют прогноз — без оглядки друг на друга. Каждый со своей специализацией.',
+      en: 'Seven agents independently form a forecast — blind to each other. Each with its specialty.',
+    },
+  },
+  {
+    n: '03',
+    title: { ru: 'Мета-анализ', en: 'Meta-Analysis' },
+    body: {
+      ru: 'Супервизор взвешивает голоса по исторической точности агента, силе сигнала и текущему режиму рынка.',
+      en: 'The supervisor weighs votes by historical accuracy, signal strength and current market regime.',
+    },
+  },
+  {
+    n: '04',
+    title: { ru: 'Решение', en: 'Decision' },
+    body: {
+      ru: 'Long, short или skip — с уровнем уверенности и риск-параметрами. Опционально исполняется автоматически.',
+      en: 'Long, short or skip — with confidence and risk parameters. Optionally executed automatically.',
+    },
+  },
+];
+
+window.ADVANTAGES = [
+  {
+    n: 'I',
+    t: { ru: 'Нет одной точки отказа',         en: 'No single point of failure' },
+    b: { ru: 'Семь моделей вместо одной — ошибка одного агента редко становится ошибкой совета.',
+         en: 'Seven models instead of one — a single agent’s mistake rarely becomes the council’s.' },
+  },
+  {
+    n: 'II',
+    t: { ru: 'Фильтр ложных сигналов',          en: 'False-signal filter' },
+    b: { ru: 'Если консенсус слабый — система просто не торгует. Skip — это тоже решение.',
+         en: 'When consensus is weak, the system simply stays out. Skip is a decision too.' },
+  },
+  {
+    n: 'III',
+    t: { ru: 'Адаптивные веса',                  en: 'Adaptive weights' },
+    b: { ru: 'Точность каждого агента пересчитывается на скользящем окне — рынок меняется, веса тоже.',
+         en: 'Each agent’s accuracy is recomputed on a rolling window — markets shift, weights follow.' },
+  },
+  {
+    n: 'IV',
+    t: { ru: 'Прозрачность логики',              en: 'Transparent reasoning' },
+    b: { ru: 'Каждое решение — с раскладкой голосов. Видно, кто за, кто против и почему.',
+         en: 'Every decision shows its vote breakdown. You see who voted, against, and why.' },
+  },
+  {
+    n: 'V',
+    t: { ru: 'Дисциплина без эмоций',            en: 'Discipline without emotion' },
+    b: { ru: 'Никакого FOMO, никакой мести рынку. Решает только статистика и риск-лимиты.',
+         en: 'No FOMO, no revenge trades. Only statistics and risk limits decide.' },
+  },
+  {
+    n: 'VI',
+    t: { ru: 'Риск-менеджмент по умолчанию',     en: 'Risk management by default' },
+    b: { ru: 'Размер позиции, стопы и предельная просадка — параметры, а не пожелания.',
+         en: 'Position sizing, stops and max drawdown are parameters, not wishes.' },
+  },
+];
+
+window.STACK = [
+  'Multi-Agent LLM',
+  'Real-time Market Data',
+  'Binance · Bybit · OKX API',
+  'Backtesting Engine',
+  'Risk Management Layer',
+  'WebSocket Stream Fusion',
+  'Vector Memory',
+  'Rolling Accuracy Tracker',
+];
+
+window.ROADMAP = [
+  { q: 'Q1 · 2026', s: { ru: 'В работе', en: 'In progress' }, t: { ru: 'MVP с семью агентами',           en: 'MVP with seven agents' },
+    b: { ru: 'Закрытое альфа-тестирование на BTC и ETH. Бэктест на 24 месяцах.', en: 'Closed alpha on BTC & ETH. 24-month backtest.' } },
+  { q: 'Q2 · 2026', s: { ru: 'Запланировано', en: 'Planned' }, t: { ru: 'Публичная бета',                en: 'Public beta' },
+    b: { ru: 'Расширение до топ-30 пар. Дашборд с раскладкой голосов в реальном времени.', en: 'Expansion to top-30 pairs. Live vote-breakdown dashboard.' } },
+  { q: 'Q3 · 2026', s: { ru: 'Запланировано', en: 'Planned' }, t: { ru: 'Автоисполнение сделок',         en: 'Auto-execution' },
+    b: { ru: 'Подключение к Binance / Bybit / OKX через изолированные API-ключи.', en: 'Binance / Bybit / OKX via isolated API keys.' } },
+  { q: 'Q4 · 2026', s: { ru: 'Идея',          en: 'Idea' },     t: { ru: 'Кастомизация агентов',         en: 'Custom agents & marketplace' },
+    b: { ru: 'Свои агенты, свои веса. Маркетплейс стратегий между пользователями.', en: 'Bring your own agents and weights. Strategy marketplace.' } },
+];
+
+window.FAQ = [
+  {
+    q: { ru: 'Безопасны ли мои API-ключи?', en: 'Are my API keys safe?' },
+    a: { ru: 'Ключи хранятся изолированно на стороне пользователя или в зашифрованном vault, требуют только торговых разрешений (без вывода средств) и могут быть отозваны в любой момент.',
+         en: 'Keys are stored isolated client-side or in an encrypted vault, require trade-only permissions (no withdrawals), and can be revoked at any time.' },
+  },
+  {
+    q: { ru: 'Какие биржи поддерживаются?', en: 'Which exchanges are supported?' },
+    a: { ru: 'На запуске — Binance, Bybit и OKX. Расширение по запросам сообщества.',
+         en: 'At launch — Binance, Bybit and OKX. Expanded by community demand.' },
+  },
+  {
+    q: { ru: 'Сколько это стоит?', en: 'How much does it cost?' },
+    a: { ru: 'Подписочная модель с тремя тарифами и пожизненными местами для ранних пользователей. Цены будут опубликованы перед бетой.',
+         en: 'Subscription with three tiers and lifetime seats for early users. Pricing will be published before beta.' },
+  },
+  {
+    q: { ru: 'Гарантирует ли система прибыль?', en: 'Does it guarantee profit?' },
+    a: { ru: 'Нет. Никто не может гарантировать прибыль на крипторынке. Conclave — это инструмент дисциплины и анализа, а не печатный станок. Прошлые результаты не предсказывают будущих.',
+         en: 'No. No one can guarantee profit in crypto. Conclave is a tool for discipline and analysis, not a money printer. Past performance does not predict future results.' },
+  },
+  {
+    q: { ru: 'Как работает риск-менеджмент?', en: 'How does risk management work?' },
+    a: { ru: 'Каждая сделка получает размер по правилу Келли с защитной долей, фиксированный стоп и трейлинг. На уровне портфеля — лимит экспозиции, корреляционный фильтр и максимальная просадка.',
+         en: 'Each trade is sized by a fractional-Kelly rule with a fixed stop and trailing logic. At the portfolio level — exposure caps, correlation filter, and max-drawdown circuit breaker.' },
+  },
+];
+
+window.COPY = {
+  ru: {
+    nav_manifesto: 'Манифест',
+    nav_council: 'Совет',
+    nav_method: 'Метод',
+    nav_dashboard: 'Терминал',
+    nav_roadmap: 'План',
+    nav_faq: 'Вопросы',
+    issue: 'Выпуск №001',
+    edition: 'Издание ранних пользователей',
+    issued: 'Издаётся ежедневно',
+    eyebrow_live: 'СОВЕТ ЗАСЕДАЕТ В РЕАЛЬНОМ ВРЕМЕНИ',
+    hero_pre: 'Семь агентов. Один вердикт.',
+    hero_h1_a: 'Совет ',
+    hero_h1_em: 'ИИ',
+    hero_h1_b: ', который не торопится ошибаться.',
+    hero_lede: 'Conclave — мульти-агентная система для криптотрейдинга. Семь специализированных моделей голосуют по каждой сделке. Супервизор взвешивает их голоса и решает: long, short или ничего. Особенно — ничего.',
+    hero_cta_1: 'Запросить ранний доступ',
+    hero_cta_2: 'Смотреть демо',
+    stat_agents: 'Агентов в совете',
+    stat_signals: 'Сигналов в сутки',
+    stat_accuracy: 'Точность на бэктесте',
+    stat_skip: 'Решений «skip»',
+    problem_eyebrow: 'I · ПРОБЛЕМА',
+    problem_h: 'Один ИИ — это одно мнение. На рынке мнений всегда мало.',
+    problem_body_1: 'Большинство торговых ботов опирается на одну модель. Когда она ошибается — а ошибается она часто — ошибается всё. Переоптимизация под прошлое, шум вместо сигнала, эмоциональные решения трейдера сверху.',
+    problem_body_2: 'Реальные деньги теряются не на сложных рынках, а на ложной уверенности.',
+    problem_pull: 'Один взгляд на рынок — это не стратегия. Это суеверие.',
+    council_eyebrow: 'II · СОВЕТ',
+    council_h: 'Семь специалистов вокруг одного вердикта.',
+    council_lede: 'Каждый агент — отдельная модель со своей областью. Они не общаются между собой. Их голоса собирает и взвешивает супервизор — он один видит всю картину.',
+    council_legend_long: 'long',
+    council_legend_short: 'short',
+    council_legend_skip: 'skip',
+    method_eyebrow: 'III · МЕТОД',
+    method_h: 'Как принимается решение',
+    advantages_eyebrow: 'IV · ПРЕИМУЩЕСТВА',
+    advantages_h: 'Шесть причин не доверять одной модели.',
+    stack_eyebrow: 'V · СТЕК',
+    stack_h: 'Что под капотом',
+    stack_body: 'Современный мульти-агентный фреймворк, потоковая интеграция с биржами и риск-слой между моделями и реальными деньгами.',
+    dash_eyebrow: 'VI · ТЕРМИНАЛ',
+    dash_h: 'Заседание в прямом эфире',
+    dash_lede: 'Это макет интерфейса. Голоса меняются — система пересчитывает консенсус каждые несколько секунд.',
+    roadmap_eyebrow: 'VII · ПЛАН',
+    roadmap_h: 'Куда мы идём',
+    faq_eyebrow: 'VIII · ВОПРОСЫ',
+    faq_h: 'Что нужно знать',
+    cta_eyebrow: 'РАННИЙ ДОСТУП',
+    cta_h: 'Войдите в первый созыв.',
+    cta_body: 'Сто мест в закрытой альфе. Бесплатно для участников до публичного запуска.',
+    cta_email: 'Электронная почта',
+    cta_tg: 'Telegram (по желанию)',
+    cta_btn: 'Присоединиться к waitlist',
+    cta_micro: 'Мы пишем редко и по делу. Отписаться — одним кликом.',
+    foot_disclaimer_t: 'Дисклеймер о рисках',
+    foot_disclaimer: 'Торговля криптовалютами связана с высоким риском и может привести к полной потере вложенных средств. Conclave — аналитический инструмент, а не финансовый совет. Система не гарантирует прибыль. Прошлые результаты не предсказывают будущих. Пользователь несёт полную ответственность за свои торговые решения.',
+    foot_links: 'Документация · Whitepaper · Telegram · X · GitHub',
+    foot_copy: '© 2026 Conclave Labs. Все права защищены.',
+    long: 'LONG', short: 'SHORT', skip: 'SKIP',
+    confidence: 'уверенность',
+    weight: 'вес',
+    accuracy: 'точность',
+    verdict: 'Вердикт супервизора',
+  },
+  en: {
+    nav_manifesto: 'Manifesto',
+    nav_council: 'Council',
+    nav_method: 'Method',
+    nav_dashboard: 'Terminal',
+    nav_roadmap: 'Roadmap',
+    nav_faq: 'FAQ',
+    issue: 'Issue №001',
+    edition: 'Early-Access Edition',
+    issued: 'Published daily',
+    eyebrow_live: 'COUNCIL IN SESSION · LIVE',
+    hero_pre: 'Seven agents. One verdict.',
+    hero_h1_a: 'An ',
+    hero_h1_em: 'AI council',
+    hero_h1_b: ' that takes its time before it’s wrong.',
+    hero_lede: 'Conclave is a multi-agent system for crypto trading. Seven specialised models vote on every trade. A supervisor weighs their votes and decides: long, short, or nothing. Especially — nothing.',
+    hero_cta_1: 'Request early access',
+    hero_cta_2: 'Watch demo',
+    stat_agents: 'Agents in the council',
+    stat_signals: 'Signals per day',
+    stat_accuracy: 'Accuracy on backtest',
+    stat_skip: 'Decisions to skip',
+    problem_eyebrow: 'I · THE PROBLEM',
+    problem_h: 'One AI is one opinion. The market is short on opinions.',
+    problem_body_1: 'Most trading bots lean on a single model. When it’s wrong — and it often is — everything is wrong. Overfitted to the past, noise instead of signal, with the trader’s emotions stacked on top.',
+    problem_body_2: 'Real money is lost not on hard markets, but on false certainty.',
+    problem_pull: 'One look at the market isn’t a strategy. It’s superstition.',
+    council_eyebrow: 'II · COUNCIL',
+    council_h: 'Seven specialists around one verdict.',
+    council_lede: 'Each agent is a separate model with its own domain. They don’t talk to each other. The supervisor — alone seeing all of them — collects and weighs their votes.',
+    council_legend_long: 'long',
+    council_legend_short: 'short',
+    council_legend_skip: 'skip',
+    method_eyebrow: 'III · METHOD',
+    method_h: 'How a decision is made',
+    advantages_eyebrow: 'IV · ADVANTAGES',
+    advantages_h: 'Six reasons not to trust one model.',
+    stack_eyebrow: 'V · STACK',
+    stack_h: 'Under the hood',
+    stack_body: 'A modern multi-agent framework, streaming integrations with exchanges, and a risk layer between the models and real money.',
+    dash_eyebrow: 'VI · TERMINAL',
+    dash_h: 'Council in session',
+    dash_lede: 'This is an interface mock-up. Votes shift — the system recomputes consensus every few seconds.',
+    roadmap_eyebrow: 'VII · ROADMAP',
+    roadmap_h: 'Where we’re headed',
+    faq_eyebrow: 'VIII · QUESTIONS',
+    faq_h: 'What you should know',
+    cta_eyebrow: 'EARLY ACCESS',
+    cta_h: 'Join the first convocation.',
+    cta_body: 'A hundred seats in the closed alpha. Free for members until public launch.',
+    cta_email: 'Email',
+    cta_tg: 'Telegram (optional)',
+    cta_btn: 'Join the waitlist',
+    cta_micro: 'We write rarely and only when it matters. Unsubscribe in one click.',
+    foot_disclaimer_t: 'Risk Disclaimer',
+    foot_disclaimer: 'Trading cryptocurrencies carries a high level of risk and can result in the total loss of invested funds. Conclave is an analytical tool, not financial advice. The system does not guarantee profit. Past performance does not predict future results. The user bears full responsibility for their trading decisions.',
+    foot_links: 'Docs · Whitepaper · Telegram · X · GitHub',
+    foot_copy: '© 2026 Conclave Labs. All rights reserved.',
+    long: 'LONG', short: 'SHORT', skip: 'SKIP',
+    confidence: 'confidence',
+    weight: 'weight',
+    accuracy: 'accuracy',
+    verdict: 'Supervisor verdict',
+  },
+};
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Tweaks panel (floating dev-mode controls)
+// ============================================================
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2}
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+function TweakSection({ label }) {
+  return <div className="twk-sect">{label}</div>;
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown} className="twk-seg">
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakToggle, TweakRadio, TweakSelect,
+});
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Hooks: language, reveal-on-scroll, live verdicts
+// ============================================================
+
+const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+// Bilingual context (simplified — global state via window)
+window.useLang = function () {
+  const [lang, setLangState] = useState(() => window.__lang || 'ru');
+  useEffect(() => {
+    const onChange = (e) => setLangState(e.detail);
+    window.addEventListener('langchange', onChange);
+    return () => window.removeEventListener('langchange', onChange);
+  }, []);
+  const setLang = useCallback((l) => {
+    window.__lang = l;
+    window.dispatchEvent(new CustomEvent('langchange', { detail: l }));
+  }, []);
+  const t = useCallback((key) => (window.COPY[lang] && window.COPY[lang][key]) || key, [lang]);
+  const tr = useCallback((obj) => (obj && obj[lang]) || (obj && obj.en) || '', [lang]);
+  return { lang, setLang, t, tr };
+};
+
+// Reveal on scroll
+window.useReveal = function () {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+};
+
+// Live verdicts — agents shuffle their votes every few seconds
+window.useLiveCouncil = function (seed = 0) {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setTick((x) => x + 1), 2400);
+    return () => clearInterval(id);
+  }, []);
+
+  return useMemo(() => {
+    const r = (i) => {
+      const x = Math.sin((tick + 1) * 9.7 + i * 12.3 + seed) * 10000;
+      return x - Math.floor(x);
+    };
+    const votes = window.AGENTS.map((a, i) => {
+      const v = r(i);
+      const dir = v < 0.55 ? 'LONG' : v < 0.78 ? 'SHORT' : 'SKIP';
+      const conf = Math.round(40 + r(i + 30) * 55);
+      return { id: a.id, dir, conf, weight: a.weight };
+    });
+    let long = 0, short = 0, skip = 0;
+    votes.forEach((v) => {
+      const w = v.weight * (v.conf / 100);
+      if (v.dir === 'LONG') long += w;
+      else if (v.dir === 'SHORT') short += w;
+      else skip += w;
+    });
+    const total = long + short + skip || 1;
+    const longPct = long / total;
+    const shortPct = short / total;
+    const skipPct = skip / total;
+    let verdict = 'SKIP';
+    let conf = Math.round(skipPct * 100);
+    if (longPct > 0.5 && longPct > shortPct + 0.12) { verdict = 'LONG'; conf = Math.round(longPct * 100); }
+    else if (shortPct > 0.5 && shortPct > longPct + 0.12) { verdict = 'SHORT'; conf = Math.round(shortPct * 100); }
+    else { verdict = 'SKIP'; conf = Math.round(Math.max(longPct, shortPct, skipPct) * 100); }
+    return { tick, votes, verdict, conf, longPct, shortPct, skipPct };
+  }, [tick, seed]);
+};
+
+// Animated number counter — runs immediately if already in viewport
+window.useCount = function (target, duration = 1400, start = 0) {
+  const [value, setValue] = useState(start);
+  const ref = useRef(null);
+  const ranRef = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || ranRef.current) return;
+    const run = () => {
+      if (ranRef.current) return;
+      ranRef.current = true;
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setValue(start + (target - start) * eased);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    // Already visible? run immediately.
+    const r = el.getBoundingClientRect();
+    const inView = r.top < window.innerHeight && r.bottom > 0;
+    if (inView) { run(); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { run(); io.disconnect(); } });
+    }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [target, duration, start]);
+  return [value, ref];
+};
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Masthead, Hero, Ticker
+// ============================================================
+
+const { useState: useStateA, useEffect: useEffectA, useRef: useRefA } = React;
+
+// ── Masthead (top bar mimicking a newspaper masthead) ────────
+function Masthead() {
+  const { lang, setLang, t } = window.useLang();
+  return (
+    <header className="masthead">
+      <div className="page masthead-row">
+        <div className="masthead-left mono small">
+          <span>{t('issue')}</span>
+          <span className="dim">·</span>
+          <span>{t('edition')}</span>
+        </div>
+        <a href="#top" className="masthead-logo serif">Conclave<span className="logo-dot">.</span></a>
+        <div className="masthead-right">
+          <nav className="masthead-nav">
+            <a href="#manifesto">{t('nav_manifesto')}</a>
+            <a href="#council">{t('nav_council')}</a>
+            <a href="#method">{t('nav_method')}</a>
+            <a href="#dashboard">{t('nav_dashboard')}</a>
+            <a href="#roadmap">{t('nav_roadmap')}</a>
+          </nav>
+          <div className="lang-switch mono">
+            <button className={lang === 'ru' ? 'on' : ''} onClick={() => setLang('ru')}>RU</button>
+            <span>/</span>
+            <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
+          </div>
+        </div>
+      </div>
+      <div className="rule"></div>
+    </header>
+  );
+}
+
+// ── Live ticker (verdicts marquee) ───────────────────────────
+function VerdictTicker() {
+  const { tr, t } = window.useLang();
+  const items = [...window.VERDICTS, ...window.VERDICTS];
+  return (
+    <div className="marquee" aria-label="Live verdicts">
+      <div className="marquee-track">
+        {items.map((v, i) => (
+          <span key={i} className="marquee-item">
+            <span className="m-pair">{v.pair}</span>
+            <span className={`m-dir m-${v.dir.toLowerCase()}`}>{t(v.dir.toLowerCase())}</span>
+            <span className="m-conf">· {v.conf}%</span>
+            <span className="m-note">— {tr(v.note)}</span>
+            <span className="m-aster">✱</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Tiny inline sparkline for hero stat ──────────────────────
+function Spark({ data, color = 'currentColor' }) {
+  const w = 80, h = 24;
+  const max = Math.max(...data), min = Math.min(...data);
+  const pts = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * w;
+    const y = h - ((v - min) / (max - min || 1)) * h;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="spark">
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="1.2"/>
+    </svg>
+  );
+}
+
+// ── Hero ─────────────────────────────────────────────────────
+function Hero({ bgStyle }) {
+  const { t, tr, lang } = window.useLang();
+  const reveal = window.useReveal();
+  const [agents, agentsRef] = window.useCount(7, 900);
+  const [signals, signalsRef] = window.useCount(2840, 1600);
+  const [acc, accRef] = window.useCount(73.4, 1600);
+  const [skip, skipRef] = window.useCount(38, 1400);
+  const today = new Date();
+  const dateStr = today.toLocaleDateString(lang === 'ru' ? 'ru-RU' : 'en-US', { day: '2-digit', month: 'long', year: 'numeric' });
+
+  return (
+    <section id="top" className="hero">
+      <HeroBackground style={bgStyle} />
+      <div className="page hero-inner">
+        <div className="hero-eyebrow eyebrow"><span className="dot"></span>{t('eyebrow_live')}</div>
+        <h1 className="h1 hero-h1" ref={reveal}>
+          {t('hero_h1_a')}<em>{t('hero_h1_em')}</em>{t('hero_h1_b')}
+        </h1>
+        <div className="hero-grid">
+          <div className="hero-lede-col">
+            <p className="lede hero-lede">{t('hero_lede')}</p>
+            <div className="hero-cta">
+              <a className="btn" href="#cta">
+                {t('hero_cta_1')} <span className="arrow">→</span>
+              </a>
+              <a className="btn btn-ghost" href="#dashboard">
+                {t('hero_cta_2')} <span className="arrow">→</span>
+              </a>
+            </div>
+          </div>
+          <aside className="hero-meta">
+            <div className="hm-eyebrow mono small">{lang === 'ru' ? '— ВЫХОДНЫЕ ДАННЫЕ —' : '— COLOPHON —'}</div>
+            <dl className="hm-list">
+              <div className="hm-row"><dt>{lang === 'ru' ? 'Дата' : 'Date'}</dt><dd>{dateStr}</dd></div>
+              <div className="hm-row"><dt>{lang === 'ru' ? 'Состав' : 'Composition'}</dt><dd>7 × LLM · 1 × Supervisor</dd></div>
+              <div className="hm-row"><dt>{lang === 'ru' ? 'Биржи' : 'Venues'}</dt><dd>Binance · Bybit · OKX</dd></div>
+              <div className="hm-row"><dt>{lang === 'ru' ? 'Стадия' : 'Stage'}</dt><dd>Closed alpha · Q1 2026</dd></div>
+              <div className="hm-row"><dt>{lang === 'ru' ? 'Тираж' : 'Print run'}</dt><dd>100 / {lang === 'ru' ? 'мест' : 'seats'}</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+
+      <div className="page hero-stats">
+        <div className="stat" ref={agentsRef}>
+          <div className="stat-num serif">{Math.round(agents)}</div>
+          <div className="stat-lbl small">{t('stat_agents')}</div>
+        </div>
+        <div className="stat" ref={signalsRef}>
+          <div className="stat-num serif">{Math.round(signals).toLocaleString()}</div>
+          <div className="stat-lbl small">{t('stat_signals')}</div>
+        </div>
+        <div className="stat" ref={accRef}>
+          <div className="stat-num serif">{acc.toFixed(1)}<span className="stat-unit">%</span></div>
+          <div className="stat-lbl small">{t('stat_accuracy')}</div>
+          <Spark data={[60,62,58,65,68,66,70,72,69,73]} color="var(--orange)" />
+        </div>
+        <div className="stat" ref={skipRef}>
+          <div className="stat-num serif">{Math.round(skip)}<span className="stat-unit">%</span></div>
+          <div className="stat-lbl small">{t('stat_skip')}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Hero animated background (canvas — neural net particles) ─
+function HeroBackground({ style }) {
+  const ref = useRefA(null);
+  useEffectA(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let raf;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let nodes = [];
+
+    const resize = () => {
+      const r = canvas.getBoundingClientRect();
+      canvas.width = r.width * dpr;
+      canvas.height = r.height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.max(80, Math.round((r.width * r.height) / 8000));
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * r.width,
+        y: Math.random() * r.height,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        r: Math.random() * 1.8 + 0.8,
+      }));
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const cs = getComputedStyle(document.documentElement);
+    const ink = cs.getPropertyValue('--ink').trim() || '#14130F';
+    const orange = cs.getPropertyValue('--orange').trim() || '#E04E1B';
+
+    const tick = () => {
+      const r = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+
+      const linkDist = 140;
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > r.width) a.vx *= -1;
+        if (a.y < 0 || a.y > r.height) a.vy *= -1;
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < linkDist) {
+            const op = (1 - d / linkDist) * 0.36;
+            ctx.strokeStyle = `rgba(20,19,15,${op})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      nodes.forEach((n, i) => {
+        ctx.fillStyle = i % 9 === 0 ? orange : ink;
+        ctx.globalAlpha = i % 9 === 0 ? 0.75 : 0.6;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
+  }, [style]);
+
+  if (style === 'grid') {
+    return <div className="hero-bg hero-bg-grid" />;
+  }
+  if (style === 'orbits') {
+    return (
+      <svg className="hero-bg hero-bg-orbits" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice">
+        <g fill="none" stroke="var(--ink)" strokeOpacity="0.18" strokeWidth="0.6">
+          <circle cx="780" cy="340" r="120"/>
+          <circle cx="780" cy="340" r="200"/>
+          <circle cx="780" cy="340" r="280"/>
+          <circle cx="780" cy="340" r="360"/>
+        </g>
+        <g fill="var(--ink)">
+          <circle cx="780" cy="340" r="3"/>
+          <circle cx="900" cy="340" r="2.4"/>
+          <circle cx="588" cy="240" r="2.2"/>
+          <circle cx="608" cy="430" r="2"/>
+        </g>
+        <circle cx="780" cy="340" r="6" fill="var(--orange)"/>
+      </svg>
+    );
+  }
+  return <canvas ref={ref} className="hero-bg" />;
+}
+
+Object.assign(window, { Masthead, Hero, VerdictTicker, Spark });
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Council (hybrid: ring + live votes + verdict)
+// ============================================================
+
+const { useState: useStateC, useEffect: useEffectC, useRef: useRefC } = React;
+
+function CouncilDiagram() {
+  const { tr, t } = window.useLang();
+  const live = window.useLiveCouncil(7);
+  const [hover, setHover] = useStateC(null);
+
+  const cx = 300, cy = 300, R = 230;
+  const N = window.AGENTS.length;
+
+  return (
+    <div className="council-wrap">
+      <div className="council-stage">
+        <svg viewBox="0 0 600 600" className="council-svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="cog-grad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="var(--orange)" stopOpacity="0.35"/>
+              <stop offset="60%" stopColor="var(--orange)" stopOpacity="0.08"/>
+              <stop offset="100%" stopColor="var(--orange)" stopOpacity="0"/>
+            </radialGradient>
+          </defs>
+
+          {/* Outer ring */}
+          <circle cx={cx} cy={cy} r={R} fill="none" stroke="var(--hair)" strokeWidth="1" strokeDasharray="2 6"/>
+          <circle cx={cx} cy={cy} r={R - 36} fill="none" stroke="var(--hair)" strokeWidth="0.5"/>
+
+          {/* Center halo */}
+          <circle cx={cx} cy={cy} r="92" fill="url(#cog-grad)"/>
+
+          {/* Lines from each agent to center */}
+          {window.AGENTS.map((a, i) => {
+            const angle = (i / N) * Math.PI * 2 - Math.PI / 2;
+            const x = cx + Math.cos(angle) * R;
+            const y = cy + Math.sin(angle) * R;
+            const v = live.votes[i];
+            const colorVar = v.dir === 'LONG' ? 'var(--green)' : v.dir === 'SHORT' ? 'var(--red)' : 'var(--ink-3)';
+            const op = 0.18 + (v.conf / 100) * 0.55;
+            return (
+              <g key={a.id}>
+                <line x1={x} y1={y} x2={cx} y2={cy} stroke={colorVar} strokeOpacity={op} strokeWidth="0.8"/>
+                <circle r="2.4" fill={colorVar}>
+                  <animateMotion dur={`${2.4 + (i % 3) * 0.7}s`} repeatCount="indefinite" path={`M${x},${y} L${cx},${cy}`}/>
+                </circle>
+              </g>
+            );
+          })}
+
+          {/* Agents */}
+          {window.AGENTS.map((a, i) => {
+            const angle = (i / N) * Math.PI * 2 - Math.PI / 2;
+            const x = cx + Math.cos(angle) * R;
+            const y = cy + Math.sin(angle) * R;
+            const v = live.votes[i];
+            const isHover = hover === a.id;
+            const ring = v.dir === 'LONG' ? 'var(--green)' : v.dir === 'SHORT' ? 'var(--red)' : 'var(--ink-3)';
+            return (
+              <g key={a.id}
+                 transform={`translate(${x} ${y})`}
+                 onMouseEnter={() => setHover(a.id)}
+                 onMouseLeave={() => setHover(null)}
+                 className="agent-node"
+                 style={{ cursor: 'pointer' }}>
+                <circle r="34" fill="var(--paper)" stroke="var(--ink)" strokeWidth="1"/>
+                <circle r="34" fill="none" stroke={ring} strokeWidth="2" strokeOpacity={isHover ? 1 : 0.7}>
+                  <animate attributeName="r" values="34;36;34" dur="2.4s" repeatCount="indefinite"/>
+                </circle>
+                <text textAnchor="middle" y="-3" fontFamily="var(--serif)" fontSize="20" fill="var(--ink)">{a.glyph}</text>
+                <text textAnchor="middle" y="11" fontFamily="var(--mono)" fontSize="7.5" fill="var(--ink-3)" letterSpacing="0.1em">{a.id}</text>
+                {/* live vote badge */}
+                <g transform="translate(0 50)">
+                  <rect x="-26" y="-9" width="52" height="18" fill="var(--paper)" stroke={ring} strokeWidth="0.8"/>
+                  <text textAnchor="middle" y="3.5" fontFamily="var(--mono)" fontSize="8.5" fill={ring} letterSpacing="0.1em">{v.dir} {v.conf}%</text>
+                </g>
+              </g>
+            );
+          })}
+
+          {/* Center supervisor */}
+          <g transform={`translate(${cx} ${cy})`}>
+            <circle r="68" fill="var(--ink)"/>
+            <circle r="68" fill="none" stroke="var(--orange)" strokeWidth="1.5">
+              <animate attributeName="r" values="68;74;68" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <text textAnchor="middle" y="-8" fontFamily="var(--serif)" fontSize="14" fontStyle="italic" fill="var(--paper)">Supervisor</text>
+            <text textAnchor="middle" y="14" fontFamily="var(--mono)" fontSize="22" fill={live.verdict === 'LONG' ? '#7ED99A' : live.verdict === 'SHORT' ? '#FF8B7A' : 'var(--paper)'} letterSpacing="0.08em">{live.verdict}</text>
+            <text textAnchor="middle" y="32" fontFamily="var(--mono)" fontSize="9" fill="rgba(241,236,224,0.55)" letterSpacing="0.1em">{live.conf}% · {t('confidence').toUpperCase()}</text>
+          </g>
+        </svg>
+
+        {/* Hover detail */}
+        <div className={`agent-detail ${hover ? 'show' : ''}`}>
+          {hover && (() => {
+            const a = window.AGENTS.find((x) => x.id === hover);
+            const v = live.votes.find((x) => x.id === hover);
+            return (
+              <div>
+                <div className="ad-eyebrow mono small">AGENT · {a.id}</div>
+                <div className="ad-name serif h3">{tr(a.name)}</div>
+                <div className="ad-full small">{tr(a.full)}</div>
+                <div className="ad-meta">
+                  <div><span className="dim small">{t('weight')}</span> <span className="mono">{(a.weight * 100).toFixed(0)}%</span></div>
+                  <div><span className="dim small">{t('accuracy')}</span> <span className="mono">{(a.accuracy * 100).toFixed(0)}%</span></div>
+                  <div><span className="dim small">vote</span> <span className={`mono dir-${v.dir.toLowerCase()}`}>{v.dir} · {v.conf}%</span></div>
+                </div>
+              </div>
+            );
+          })()}
+          {!hover && (
+            <div className="ad-hint small dim">
+              ▸ {t('confidence') === 'confidence' ? 'Hover an agent to inspect.' : 'Наведите на агента, чтобы рассмотреть.'}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="council-legend">
+        <span className="lg-item"><span className="lg-dot" style={{background:'var(--green)'}}></span><span className="mono small">{t('council_legend_long')}</span></span>
+        <span className="lg-item"><span className="lg-dot" style={{background:'var(--red)'}}></span><span className="mono small">{t('council_legend_short')}</span></span>
+        <span className="lg-item"><span className="lg-dot" style={{background:'var(--ink-3)'}}></span><span className="mono small">{t('council_legend_skip')}</span></span>
+      </div>
+    </div>
+  );
+}
+
+// ── Council section ──────────────────────────────────────────
+function CouncilSection() {
+  const { t } = window.useLang();
+  return (
+    <section id="council" className="section section-council">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('council_eyebrow')}</div>
+        </div>
+        <div className="council-grid">
+          <div className="council-copy">
+            <h2 className="h2">{t('council_h')}</h2>
+            <p className="lede" style={{ marginTop: 24, maxWidth: 480 }}>{t('council_lede')}</p>
+          </div>
+          <CouncilDiagram />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { CouncilSection, CouncilDiagram });
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Problem, Method (4 steps), Advantages, Stack
+// ============================================================
+
+function ProblemSection() {
+  const { t, lang } = window.useLang();
+  return (
+    <section id="manifesto" className="section section-problem dark-section">
+      <div className="page">
+        <div className="rule rule-dark"></div>
+        <div className="sec-head">
+          <div className="eyebrow eyebrow-dark">{t('problem_eyebrow')}</div>
+        </div>
+        <div className="problem-grid">
+          <h2 className="h2 problem-h">{t('problem_h')}</h2>
+          <div className="problem-body">
+            <p className="lede lede-dark" style={{ marginBottom: 18 }}>{t('problem_body_1')}</p>
+            <p className="body body-dark">{t('problem_body_2')}</p>
+          </div>
+        </div>
+        <figure className="pull-quote pull-quote-dark">
+          <span className="pq-mark serif">"</span>
+          <blockquote className="serif pq-text">{t('problem_pull')}</blockquote>
+          <figcaption className="pq-cite mono small">
+            {lang === 'ru' ? '— Манифест Conclave, §1' : '— Conclave Manifesto, §1'}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function MethodSection() {
+  const { t, tr } = window.useLang();
+  return (
+    <section id="method" className="section section-method">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('method_eyebrow')}</div>
+          <h2 className="h2" style={{ marginTop: 12 }}>{t('method_h')}</h2>
+        </div>
+        <div className="steps">
+          {window.STEPS.map((s, i) => (
+            <article key={s.n} className="step">
+              <div className="step-n mono">{s.n}</div>
+              <div className="step-body">
+                <h3 className="step-title serif">{tr(s.title)}</h3>
+                <p className="body">{tr(s.body)}</p>
+              </div>
+              <div className="step-deco" aria-hidden="true">
+                {i === 0 && <DecoStream />}
+                {i === 1 && <DecoFan />}
+                {i === 2 && <DecoScales />}
+                {i === 3 && <DecoTarget />}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DecoStream() {
+  return (
+    <svg viewBox="0 0 100 60" width="100%" height="100%">
+      <g stroke="var(--ink)" strokeWidth="0.6" fill="none">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <path key={i} d={`M0 ${5 + i * 4} Q25 ${4 + i * 4 + Math.sin(i)*3} 50 ${5 + i * 4} T100 ${5 + i * 4}`} opacity={0.2 + (i % 3) * 0.2}/>
+        ))}
+      </g>
+      <circle cx="50" cy="30" r="2.5" fill="var(--orange)"/>
+    </svg>
+  );
+}
+
+function DecoFan() {
+  return (
+    <svg viewBox="0 0 100 60" width="100%" height="100%">
+      <g stroke="var(--ink)" strokeWidth="0.6">
+        {[-30,-20,-10,0,10,20,30].map((a, i) => (
+          <line key={i} x1="50" y1="55" x2={50 + Math.sin(a*Math.PI/180)*55} y2={55 - Math.cos(a*Math.PI/180)*55} opacity={i === 3 ? 1 : 0.35}/>
+        ))}
+      </g>
+      {[-30,-20,-10,0,10,20,30].map((a, i) => (
+        <circle key={i} cx={50 + Math.sin(a*Math.PI/180)*48} cy={55 - Math.cos(a*Math.PI/180)*48} r="2" fill={i === 3 ? 'var(--orange)' : 'var(--ink)'}/>
+      ))}
+    </svg>
+  );
+}
+
+function DecoScales() {
+  return (
+    <svg viewBox="0 0 100 60" width="100%" height="100%">
+      <g stroke="var(--ink)" strokeWidth="0.8" fill="none">
+        <line x1="50" y1="6" x2="50" y2="40"/>
+        <line x1="20" y1="40" x2="80" y2="40"/>
+        <line x1="20" y1="40" x2="20" y2="50"/>
+        <line x1="80" y1="40" x2="80" y2="50"/>
+        <ellipse cx="20" cy="52" rx="14" ry="3"/>
+        <ellipse cx="80" cy="52" rx="14" ry="3" stroke="var(--orange)"/>
+      </g>
+      <text x="50" y="14" textAnchor="middle" fontFamily="var(--mono)" fontSize="6" fill="var(--ink-3)">Σw·v</text>
+    </svg>
+  );
+}
+
+function DecoTarget() {
+  return (
+    <svg viewBox="0 0 100 60" width="100%" height="100%">
+      <g fill="none" stroke="var(--ink)" strokeWidth="0.6">
+        <circle cx="50" cy="30" r="22"/>
+        <circle cx="50" cy="30" r="14"/>
+        <circle cx="50" cy="30" r="6"/>
+      </g>
+      <circle cx="50" cy="30" r="2.5" fill="var(--orange)"/>
+      <line x1="20" y1="55" x2="50" y2="30" stroke="var(--orange)" strokeWidth="0.8"/>
+    </svg>
+  );
+}
+
+function AdvantagesSection() {
+  const { t, tr } = window.useLang();
+  return (
+    <section id="advantages" className="section section-adv">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('advantages_eyebrow')}</div>
+          <h2 className="h2" style={{ marginTop: 12, maxWidth: 880 }}>{t('advantages_h')}</h2>
+        </div>
+        <div className="adv-grid">
+          {window.ADVANTAGES.map((a) => (
+            <article key={a.n} className="adv-card">
+              <div className="adv-n serif">{a.n}.</div>
+              <h3 className="adv-t serif">{tr(a.t)}</h3>
+              <p className="body">{tr(a.b)}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StackSection() {
+  const { t } = window.useLang();
+  return (
+    <section id="stack" className="section section-stack">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('stack_eyebrow')}</div>
+        </div>
+        <div className="stack-grid">
+          <div>
+            <h2 className="h2">{t('stack_h')}</h2>
+            <p className="lede" style={{ marginTop: 22, maxWidth: 520 }}>{t('stack_body')}</p>
+          </div>
+          <div className="stack-tags">
+            {window.STACK.map((s, i) => (
+              <span key={i} className="stack-tag mono">
+                <span className="stack-tag-n">{String(i + 1).padStart(2, '0')}</span>
+                <span>{s}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { ProblemSection, MethodSection, AdvantagesSection, StackSection });
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Live Dashboard mockup
+// ============================================================
+
+const { useState: useStateD, useEffect: useEffectD, useRef: useRefD, useMemo: useMemoD } = React;
+
+function usePriceSeries(n = 120, base = 67400, vol = 120) {
+  const [data, setData] = useStateD(() => {
+    let p = base;
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      p += (Math.random() - 0.5) * vol;
+      arr.push(p);
+    }
+    return arr;
+  });
+  useEffectD(() => {
+    const id = setInterval(() => {
+      setData((prev) => {
+        const last = prev[prev.length - 1];
+        const next = last + (Math.random() - 0.48) * vol;
+        return [...prev.slice(1), next];
+      });
+    }, 800);
+    return () => clearInterval(id);
+  }, [vol]);
+  return data;
+}
+
+function PriceChart({ data, decision }) {
+  const w = 760, h = 280, pad = 12;
+  const min = Math.min(...data), max = Math.max(...data);
+  const span = max - min || 1;
+  const scaleX = (i) => pad + (i / (data.length - 1)) * (w - pad * 2);
+  const scaleY = (v) => pad + (1 - (v - min) / span) * (h - pad * 2);
+  const path = data.map((v, i) => `${i === 0 ? 'M' : 'L'} ${scaleX(i).toFixed(1)} ${scaleY(v).toFixed(1)}`).join(' ');
+  const fillPath = `${path} L ${scaleX(data.length - 1).toFixed(1)} ${h - pad} L ${pad} ${h - pad} Z`;
+  const last = data[data.length - 1];
+  const first = data[0];
+  const change = last - first;
+  const changePct = (change / first) * 100;
+
+  const color = decision === 'LONG' ? 'var(--green)' : decision === 'SHORT' ? 'var(--red)' : 'var(--ink)';
+
+  return (
+    <div className="chart-wrap">
+      <svg viewBox={`0 0 ${w} ${h}`} width="100%" preserveAspectRatio="none" className="chart-svg">
+        <defs>
+          <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={color} stopOpacity="0.18"/>
+            <stop offset="100%" stopColor={color} stopOpacity="0"/>
+          </linearGradient>
+        </defs>
+        {[0.25, 0.5, 0.75].map((p, i) => (
+          <line key={i} x1={pad} y1={pad + p * (h - pad * 2)} x2={w - pad} y2={pad + p * (h - pad * 2)} stroke="var(--hair)" strokeWidth="0.6" strokeDasharray="2 4"/>
+        ))}
+        <path d={fillPath} fill="url(#chart-fill)"/>
+        <path d={path} fill="none" stroke={color} strokeWidth="1.2"/>
+        {/* last dot */}
+        <circle cx={scaleX(data.length - 1)} cy={scaleY(last)} r="3" fill={color}/>
+        <circle cx={scaleX(data.length - 1)} cy={scaleY(last)} r="6" fill="none" stroke={color} strokeOpacity="0.4">
+          <animate attributeName="r" values="3;10;3" dur="1.6s" repeatCount="indefinite"/>
+          <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="1.6s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div className="chart-meta">
+        <div className="cm-pair mono">BTC / USDT</div>
+        <div className="cm-price serif">${last.toFixed(0)}</div>
+        <div className={`cm-chg mono ${change >= 0 ? 'pos' : 'neg'}`}>
+          {change >= 0 ? '+' : ''}{change.toFixed(0)} · {changePct >= 0 ? '+' : ''}{changePct.toFixed(2)}%
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VoteBars({ live }) {
+  const { tr } = window.useLang();
+  return (
+    <div className="vote-bars">
+      {window.AGENTS.map((a, i) => {
+        const v = live.votes[i];
+        const cls = v.dir === 'LONG' ? 'long' : v.dir === 'SHORT' ? 'short' : 'skip';
+        return (
+          <div key={a.id} className={`vote-row vote-${cls}`}>
+            <span className="vr-id mono">{a.id}</span>
+            <span className="vr-name small">{tr(a.name)}</span>
+            <span className="vr-bar"><span className="vr-fill" style={{ width: `${v.conf}%` }}></span></span>
+            <span className="vr-dir mono">{v.dir}</span>
+            <span className="vr-conf mono">{v.conf}%</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function TradeLog() {
+  const baseLog = useMemoD(() => ([
+    { time: '14:32:18', pair: 'BTC/USDT',  dir: 'LONG',  conf: 84, pnl: '+1.42%' },
+    { time: '14:18:02', pair: 'AVAX/USDT', dir: 'LONG',  conf: 68, pnl: '+0.71%' },
+    { time: '13:51:44', pair: 'ETH/USDT',  dir: 'SKIP',  conf: 41, pnl: '—'      },
+    { time: '13:22:09', pair: 'SOL/USDT',  dir: 'SHORT', conf: 71, pnl: '+0.96%' },
+    { time: '12:48:33', pair: 'TIA/USDT',  dir: 'LONG',  conf: 76, pnl: '+2.18%' },
+    { time: '12:11:50', pair: 'ARB/USDT',  dir: 'LONG',  conf: 62, pnl: '−0.34%' },
+    { time: '11:39:05', pair: 'DOGE/USDT', dir: 'SHORT', conf: 58, pnl: '+0.52%' },
+  ]), []);
+  return (
+    <div className="trade-log">
+      <div className="tl-head mono small">
+        <span>TIME</span><span>PAIR</span><span>DIR</span><span>CONF</span><span>P&L</span>
+      </div>
+      {baseLog.map((r, i) => (
+        <div key={i} className={`tl-row mono dir-${r.dir.toLowerCase()}`}>
+          <span>{r.time}</span>
+          <span>{r.pair}</span>
+          <span>{r.dir}</span>
+          <span>{r.conf}%</span>
+          <span>{r.pnl}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DashboardSection() {
+  const { t } = window.useLang();
+  const live = window.useLiveCouncil(3);
+  const data = usePriceSeries();
+
+  return (
+    <section id="dashboard" className="section section-dash">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('dash_eyebrow')}</div>
+          <h2 className="h2" style={{ marginTop: 12 }}>{t('dash_h')}</h2>
+          <p className="lede" style={{ marginTop: 16, maxWidth: 620 }}>{t('dash_lede')}</p>
+        </div>
+
+        <div className="dashboard">
+          <div className="dash-chrome">
+            <div className="dc-left mono">
+              <span className="dc-dot dc-dot-r"></span>
+              <span className="dc-dot dc-dot-y"></span>
+              <span className="dc-dot dc-dot-g"></span>
+              <span className="dc-title">conclave / terminal · v0.4.2</span>
+            </div>
+            <div className="dc-right mono small">● LIVE · paper-trading mode</div>
+          </div>
+
+          <div className="dash-grid">
+            <div className="dash-chart-cell">
+              <PriceChart data={data} decision={live.verdict}/>
+            </div>
+
+            <div className="dash-verdict-cell">
+              <div className="dv-eyebrow mono small">{t('verdict')}</div>
+              <div className={`dv-decision serif dv-${live.verdict.toLowerCase()}`}>{live.verdict}</div>
+              <div className="dv-conf">
+                <div className="dv-conf-bar"><div className="dv-conf-fill" style={{ width: `${live.conf}%`, background: live.verdict === 'LONG' ? 'var(--green)' : live.verdict === 'SHORT' ? 'var(--red)' : 'var(--ink-3)' }}></div></div>
+                <div className="dv-conf-label mono small">{live.conf}% {t('confidence')}</div>
+              </div>
+              <div className="dv-split">
+                <div><span className="mono dim small">L</span> <span className="mono">{Math.round(live.longPct * 100)}%</span></div>
+                <div><span className="mono dim small">S</span> <span className="mono">{Math.round(live.shortPct * 100)}%</span></div>
+                <div><span className="mono dim small">∅</span> <span className="mono">{Math.round(live.skipPct * 100)}%</span></div>
+              </div>
+            </div>
+
+            <div className="dash-votes-cell">
+              <div className="dv-eyebrow mono small">COUNCIL VOTES</div>
+              <VoteBars live={live} />
+            </div>
+
+            <div className="dash-log-cell">
+              <div className="dv-eyebrow mono small">RECENT DECISIONS</div>
+              <TradeLog />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { DashboardSection });
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — Roadmap, FAQ, CTA, Footer
+// ============================================================
+
+const { useState: useStateF } = React;
+
+function RoadmapSection() {
+  const { t, tr } = window.useLang();
+  return (
+    <section id="roadmap" className="section section-roadmap">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('roadmap_eyebrow')}</div>
+          <h2 className="h2" style={{ marginTop: 12 }}>{t('roadmap_h')}</h2>
+        </div>
+        <div className="timeline">
+          <div className="tl-spine"></div>
+          {window.ROADMAP.map((r, i) => (
+            <article key={i} className="tl-item">
+              <div className="tl-marker">
+                <div className="tl-circle"></div>
+              </div>
+              <div className="tl-content">
+                <div className="tl-q mono">{r.q}</div>
+                <h3 className="tl-t serif">{tr(r.t)}</h3>
+                <p className="body tl-b">{tr(r.b)}</p>
+                <div className={`tl-status mono small ${i === 0 ? 'tl-active' : ''}`}>
+                  <span className="tl-status-dot"></span> {tr(r.s)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQSection() {
+  const { t, tr } = window.useLang();
+  const [open, setOpen] = useStateF(0);
+  return (
+    <section id="faq" className="section section-faq">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="sec-head">
+          <div className="eyebrow">{t('faq_eyebrow')}</div>
+          <h2 className="h2" style={{ marginTop: 12 }}>{t('faq_h')}</h2>
+        </div>
+        <div className="faq-list">
+          {window.FAQ.map((f, i) => (
+            <div key={i} className={`faq-item ${open === i ? 'faq-open' : ''}`}>
+              <button className="faq-q" onClick={() => setOpen(open === i ? -1 : i)}>
+                <span className="faq-n mono">{String(i + 1).padStart(2, '0')}</span>
+                <span className="faq-q-text serif">{tr(f.q)}</span>
+                <span className="faq-toggle mono">{open === i ? '−' : '+'}</span>
+              </button>
+              <div className="faq-a">
+                <p className="body">{tr(f.a)}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CTASection() {
+  const { t, lang } = window.useLang();
+  const [submitted, setSubmitted] = useStateF(false);
+  const [email, setEmail] = useStateF('');
+  const [tg, setTg] = useStateF('');
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubmitted(true);
+  };
+
+  const seatsTaken = 73;
+  const seatsTotal = 100;
+  const seatsLeft = seatsTotal - seatsTaken;
+
+  return (
+    <section id="cta" className="section section-cta">
+      <div className="page">
+        <div className="rule"></div>
+        <div className="cta-eyebrow-row">
+          <span className="eyebrow">{t('cta_eyebrow')}</span>
+          <span className="eyebrow eyebrow-orange">
+            <span className="dot"></span>
+            {lang === 'ru' ? `Осталось мест: ${seatsLeft} / ${seatsTotal}` : `Seats left: ${seatsLeft} / ${seatsTotal}`}
+          </span>
+        </div>
+        <div className="cta-grid">
+          <div className="cta-copy">
+            <h2 className="h2 cta-h">{t('cta_h')}</h2>
+            <p className="lede cta-lede">{t('cta_body')}</p>
+            <div className="cta-progress">
+              <div className="cta-progress-bar">
+                <div className="cta-progress-fill" style={{ width: `${(seatsTaken / seatsTotal) * 100}%` }}></div>
+              </div>
+              <div className="cta-progress-meta">
+                <span className="mono small">
+                  <span className="cta-progress-num serif">{String(seatsTaken).padStart(3, '0')}</span>
+                  <span className="dim"> / {seatsTotal} {lang === 'ru' ? 'занято' : 'taken'}</span>
+                </span>
+                <span className="mono small dim">
+                  · {seatsLeft} {lang === 'ru' ? 'осталось' : 'remaining'}
+                </span>
+              </div>
+            </div>
+          </div>
+          {!submitted ? (
+            <form className="cta-form" onSubmit={submit}>
+              <label className="form-row">
+                <span className="form-lbl mono small">{t('cta_email')}*</span>
+                <input className="form-input" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com"/>
+              </label>
+              <label className="form-row">
+                <span className="form-lbl mono small">{t('cta_tg')}</span>
+                <input className="form-input" type="text" value={tg} onChange={(e) => setTg(e.target.value)} placeholder="@handle"/>
+              </label>
+              <button className="btn cta-btn" type="submit">{t('cta_btn')} <span className="arrow">→</span></button>
+              <p className="small dim" style={{ marginTop: 12 }}>{t('cta_micro')}</p>
+            </form>
+          ) : (
+            <div className="cta-success">
+              <div className="serif cta-success-mark">✱</div>
+              <h3 className="serif cta-success-h">
+                {lang === 'ru' ? 'Заявка принята.' : 'You're on the list.'}
+              </h3>
+              <p className="body" style={{ marginTop: 12, maxWidth: 360 }}>
+                {lang === 'ru' ? 'Мы вернёмся с приглашением, как только в созыве освободится место.' : 'We'll be in touch with an invite once a seat opens up in the convocation.'}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  const { t, lang } = window.useLang();
+  return (
+    <footer className="footer dark-section">
+      <div className="page">
+        <div className="footer-disclaimer-block">
+          <div className="footer-disc-head">
+            <span className="footer-warn">⚠</span>
+            <span className="eyebrow eyebrow-orange">{t('foot_disclaimer_t')}</span>
+          </div>
+          <p className="serif footer-disc-text">{t('foot_disclaimer')}</p>
+        </div>
+
+        <div className="footer-mid">
+          <div className="footer-mast-col">
+            <div className="footer-mast serif">Conclave<span className="logo-dot">.</span></div>
+            <p className="small footer-tagline">
+              {lang === 'ru' ? 'Совет ИИ, который не торопится ошибаться.' : 'An AI council that takes its time before it's wrong.'}
+            </p>
+          </div>
+          <div className="footer-cols">
+            <div className="footer-col">
+              <div className="footer-col-h mono small">{lang === 'ru' ? 'Продукт' : 'Product'}</div>
+              <a href="#manifesto">{lang === 'ru' ? 'Манифест' : 'Manifesto'}</a>
+              <a href="#council">{lang === 'ru' ? 'Совет' : 'Council'}</a>
+              <a href="#dashboard">{lang === 'ru' ? 'Терминал' : 'Terminal'}</a>
+              <a href="#roadmap">{lang === 'ru' ? 'План' : 'Roadmap'}</a>
+            </div>
+            <div className="footer-col">
+              <div className="footer-col-h mono small">{lang === 'ru' ? 'Документы' : 'Resources'}</div>
+              <a href="#">{lang === 'ru' ? 'Документация' : 'Docs'}</a>
+              <a href="#">Whitepaper</a>
+              <a href="#">{lang === 'ru' ? 'Бэктест-отчёты' : 'Backtest reports'}</a>
+              <a href="#">Changelog</a>
+            </div>
+            <div className="footer-col">
+              <div className="footer-col-h mono small">{lang === 'ru' ? 'Сообщество' : 'Community'}</div>
+              <a href="#">Telegram</a>
+              <a href="#">X / Twitter</a>
+              <a href="#">Discord</a>
+              <a href="#">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <div className="small footer-copy">{t('foot_copy')}</div>
+          <div className="small footer-legal">
+            <a href="#">{lang === 'ru' ? 'Условия' : 'Terms'}</a>
+            <a href="#">{lang === 'ru' ? 'Конфиденциальность' : 'Privacy'}</a>
+            <a href="#">{lang === 'ru' ? 'Раскрытие рисков' : 'Risk disclosure'}</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+Object.assign(window, { RoadmapSection, FAQSection, CTASection, Footer });
+
+  </script>
+
+  <script type="text/babel">
+// ============================================================
+// CONCLAVE — App root
+// ============================================================
+
+const TWEAK_DEFAULTS = {
+  palette: 'editorial',
+  heroBg: 'neural',
+  showTicker: true,
+};
+
+function App() {
+  const [t, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    if (t.palette === 'ink') document.documentElement.setAttribute('data-theme', 'ink');
+    else document.documentElement.removeAttribute('data-theme');
+  }, [t.palette]);
+
+  return (
+    <div className="app">
+      <window.Masthead />
+      <window.Hero bgStyle={t.heroBg} />
+      {t.showTicker && <window.VerdictTicker />}
+      <window.ProblemSection />
+      <window.CouncilSection />
+      <window.MethodSection />
+      <window.AdvantagesSection />
+      <window.StackSection />
+      <window.DashboardSection />
+      <window.RoadmapSection />
+      <window.FAQSection />
+      <window.CTASection />
+      <window.Footer />
+
+      <window.TweaksPanel>
+        <window.TweakSection label="Palette" />
+        <window.TweakRadio
+          label="Theme"
+          value={t.palette}
+          options={[
+            { value: 'editorial', label: 'Editorial' },
+            { value: 'ink', label: 'Ink (dark)' },
+          ]}
+          onChange={(v) => setTweak('palette', v)}
+        />
+        <window.TweakSection label="Hero" />
+        <window.TweakSelect
+          label="Background"
+          value={t.heroBg}
+          options={[
+            { value: 'neural', label: 'Neural network' },
+            { value: 'grid', label: 'Editorial grid' },
+            { value: 'orbits', label: 'Orbits' },
+          ]}
+          onChange={(v) => setTweak('heroBg', v)}
+        />
+        <window.TweakToggle
+          label="Live ticker"
+          value={t.showTicker}
+          onChange={(v) => setTweak('showTicker', v)}
+        />
+      </window.TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+  </script>
+</body>
+</html>
